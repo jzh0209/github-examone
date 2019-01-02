@@ -33,3 +33,20 @@ gulp.task('watch', function() {
 
 //开发环境
 gulp.task('default', gulp.series('sass', 'server', 'watch'))
+
+//压缩js
+gulp.task('bJs', function() {
+    return gulp.src('./src/js/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/js'))
+})
+
+//压缩css
+gulp.task('bCss', function() {
+    return gulp.src('./src/css/*.css')
+        .pipe(clean())
+        .pipe(gulp.dest('./dist/css'))
+})
+
+//线上环境
+gulp.task('build', gulp.series('bJs', 'bCss'))
